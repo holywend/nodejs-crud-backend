@@ -1,4 +1,4 @@
-CREATE DATABASE db_crud_sample;
+CREATE DATABASE db_logreg;
 
 DROP TABLE IF EXISTS tb_users;
 

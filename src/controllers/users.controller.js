@@ -36,7 +36,7 @@ exports.authenticate = function(req, res) {
                 return res.status(401).send({ error:true, message: 'Authentication failed. User not found.' });
             }
             // authentication successful
-            res.send(true);
+            res.status(200).send({message: true})
         })
     }
 }
