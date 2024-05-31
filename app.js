@@ -19,12 +19,12 @@ app.get('/', (req, res) => {
 });
 
 // Require user routes
-const usersRoutes = require('./src/routes/users.route');
-const authRoutes = require('./src/routes/authenticate.route');
+// const usersRoutes = require('./src/routes/users.route');
+// const authRoutes = require('./src/routes/authenticate.route');
 
-// using as middleware
-app.use('/api/v1/users', usersRoutes);
-app.use('/api/v1/auth', authRoutes);
+// // using as middleware
+// app.use('/api/v1/users', usersRoutes);
+// app.use('/api/v1/auth', authRoutes);
 
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);
