@@ -1,5 +1,6 @@
 'use strict';
 const envConfig = require('dotenv').config({path: './.env'});
+console.log(envConfig);
 const mysql = require('mysql2');
 //local mysql db connection
 const dbConn = mysql.createConnection({

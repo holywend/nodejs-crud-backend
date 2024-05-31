@@ -22,6 +22,17 @@ exports.create = function(req, res) {
         });
     }
 };
+exports.authenticate = function(req, res) {
+    if(req.body.constructor == Object && Object.keys(req.body).length === 0){
+        res.status(400).send({ error:true, message: 'Please provide all required field' });
+    }else {
+        User.authenticate(req.body.username, req.body.password, function(err, user) {
+            if (err)
+            res.send(err);
+            res.json(user);
+        })
+    }
+}
 exports.findById = function(req, res) {
     User.findById(req.params.id, function(err, user) {
         if (err)

@@ -15,13 +15,16 @@ app.use(express.static(path.join(__dirname, 'public')))
   .set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  res.render('login');
+  res.send('Hello World!');
 });
 
 // Require user routes
-const usersRoutes = require('./src/routes/users.route')
+const usersRoutes = require('./src/routes/users.route');
+const authRoutes = require('./src/routes/authenticate.route');
+
 // using as middleware
-app.use('/api/v1/users', usersRoutes)
+app.use('/api/v1/users', usersRoutes);
+app.use('/api/v1/auth', authRoutes);
 
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);
