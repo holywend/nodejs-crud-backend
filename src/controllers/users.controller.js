@@ -25,11 +25,18 @@ exports.create = function(req, res) {
 exports.authenticate = function(req, res) {
     if(req.body.constructor == Object && Object.keys(req.body).length === 0){
         res.status(400).send({ error:true, message: 'Please provide all required field' });
-    }else {
+    }else if (req.body.username == null || req.body.password == null){
+        res.status(400).send({ error:true, message: 'Please provide all required field' });
+    }else{
         User.authenticate(req.body.username, req.body.password, function(err, user) {
             if (err)
             res.send(err);
-            res.json(user);
+            // check if user is not empty
+            if (!user) {
+                return res.status(401).send({ error:true, message: 'Authentication failed. User not found.' });
+            }
+            // authentication successful
+            res.send(true);
         })
     }
 }
