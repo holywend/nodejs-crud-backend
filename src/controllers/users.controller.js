@@ -31,8 +31,8 @@ exports.authenticate = function(req, res) {
         User.authenticate(req.body.username, req.body.password, function(err, user) {
             if (err)
             res.send(err);
-            // check if user is not empty
-            if (!user) {
+            // authentication fails
+            if (user.length === 0) {
                 return res.status(401).send({ error:true, message: 'Authentication failed. User not found.' });
             }
             // authentication successful

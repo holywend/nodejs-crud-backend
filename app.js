@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')))
   .set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.render('index');
 });
 
 // Require user routes
