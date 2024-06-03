@@ -1,5 +1,8 @@
 'use strict';
 const User = require('../models/users.model');
+const jwt = require('jsonwebtoken');
+const envConfig = require('dotenv').config({path: './.env'});
+
 exports.findAll = function(req, res) {
     User.findAll(function(err, user) {
         console.log('controller')
@@ -22,24 +25,6 @@ exports.create = function(req, res) {
         });
     }
 };
-exports.authenticate = function(req, res) {
-    if(req.body.constructor == Object && Object.keys(req.body).length === 0){
-        res.status(400).send({ error:true, message: 'Please provide all required field' });
-    }else if (req.body.username == null || req.body.password == null){
-        res.status(400).send({ error:true, message: 'Please provide all required field' });
-    }else{
-        User.authenticate(req.body.username, req.body.password, function(err, user) {
-            if (err)
-            res.send(err);
-            // authentication fails
-            if (user.length === 0) {
-                return res.status(401).send({ error:true, message: 'Authentication failed. User not found.' });
-            }
-            // authentication successful
-            res.status(200).send({message: true})
-        })
-    }
-}
 exports.findById = function(req, res) {
     User.findById(req.params.id, function(err, user) {
         if (err)
