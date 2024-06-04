@@ -8,7 +8,7 @@ var User = function(user){
     this.password = user.password;
 };
 User.create = function (newUser, result) {
-    dbConn.query("INSERT INTO tb_users SET ?", newUser, function (err, res) {
+    dbConn.query("INSERT INTO tb_users SET username = ?, email = ?, password = MD5(?)", [newUser.username, newUser.email, newUser.password], function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(err, null);
