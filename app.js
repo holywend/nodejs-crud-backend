@@ -5,10 +5,13 @@ const cors = require('cors');
 
 const app = express();
 const port = parseInt(process.env.PORT) || process.argv[3] || 3100;
+const envConfig = require('dotenv').config({path: './.env'});
+const frontend = envConfig.parsed.ALLOWED_FRONTEND_URL
 
+console.log(frontend);
 // allow CORS from port:3000
 app.use(cors({
-  origin: 'http://localhost:3000' // Allow requests from this origin
+  origin: frontend // Allow requests from this origin
 }));
 
 
