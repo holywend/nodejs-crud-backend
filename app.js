@@ -1,9 +1,16 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
-const port = parseInt(process.env.PORT) || process.argv[3] || 3000;
+const port = parseInt(process.env.PORT) || process.argv[3] || 3100;
+
+// allow CORS from port:3000
+app.use(cors({
+  origin: 'http://localhost:3000' // Allow requests from this origin
+}));
+
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))

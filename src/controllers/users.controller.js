@@ -21,7 +21,7 @@ exports.create = function(req, res) {
         User.create(new_user, function(err, user) {
             if (err)
             res.send(err);
-            res.json({error:false,message:"User added successfully!",data:user});
+            res.json({error:true, message:"User added successfully!",data:user});
         });
     }
 };
@@ -39,7 +39,7 @@ exports.update = function(req, res) {
         User.update(req.params.id, new User(req.body), function(err, user) {
             if (err)
             res.send(err);
-            res.json({ error:false, message: 'User successfully updated' });
+            res.json({ error:true, message: 'User successfully updated' });
         });
     }
 };
@@ -47,6 +47,6 @@ exports.delete = function(req, res) {
     User.delete( req.params.id, function(err, user) {
         if (err)
         res.send(err);
-        res.json({ error:false, message: 'User successfully deleted' });
+        res.json({ error:true, message: 'User successfully deleted' });
     });
 };
