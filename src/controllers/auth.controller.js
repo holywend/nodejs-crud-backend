@@ -26,6 +26,8 @@ exports.authenticate = function(req, res) {
 
 exports.authorize = function(req, res, next) {
     const authHeader = req.header('Authorization');
+    if (!authHeader) return res.status(401).json({ error: 'Access denied' });
+    
     const token = authHeader.split(' ')[1]; // remove the Bearer prefix
 
     if (!token) return res.status(401).json({ error: 'Access denied' });

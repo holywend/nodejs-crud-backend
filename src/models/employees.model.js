@@ -34,7 +34,6 @@ Employee.findByName = function (name, result) {
     });
 };
 Employee.findById = function (id, result) {
-    console.log("DEBUG: ",id)
     dbConn.query("SELECT * FROM tb_employees WHERE id = ? ", id, function (err, res) {
         if(err) {
             console.log("error: ", err);

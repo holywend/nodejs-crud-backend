@@ -2,8 +2,6 @@
 const Employee = require('../models/employees.model');
 
 exports.findAll = function(req, res) {
-    console.log("DEBUG req.username", req.username);
-    console.log("DEBUG req.id", req.id);
     Employee.findAll(function(err, employee) {
         if (err)
         res.send(err);
@@ -12,8 +10,14 @@ exports.findAll = function(req, res) {
 };
 exports.create = function(req, res) {
     const new_employee = new Employee(req.body);
+    delete new_employee.id; 
+
     //handles null error
-    if(req.body.constructor === Object && Object.keys(req.body).length === 0){
+    if(
+        new_employee.fullname.length === 0 ||
+        new_employee.sex.length === 0 ||
+        new_employee.dob.length === 0
+    ){
         res.status(400).send({ error:true, message: 'Please provide all required field' });
     }else{
         Employee.create(new_employee, function(err, employee) {
@@ -48,6 +52,8 @@ exports.update = function(req, res) {
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
         res.status(400).send({ error:true, message: 'Please provide all required field' });
     }else{
+        console.log(req.params.id);
+        console.log(req.body);
         Employee.update(req.params.id, new Employee(req.body), function(err, employee) {
             if (err)
             res.send(err);
